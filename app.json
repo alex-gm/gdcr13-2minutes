@@ -1,0 +1,61 @@
+{
+  "expo": {
+    "name": "Gerbil",
+    "slug": "gerbil",
+    "version": "1.0.0",
+    "scheme": "gerbil",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.gerbil.app",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Gerbil needs microphone access so you can record voice memories and photo voiceovers.",
+        "NSPhotoLibraryUsageDescription": "Gerbil needs access to your photo library so you can attach photos to memories."
+      }
+    },
+    "android": {
+      "package": "com.gerbil.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#FDF3E7",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": ["RECORD_AUDIO", "READ_MEDIA_IMAGES"]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Gerbil needs microphone access so you can record voice memories and photo voiceovers."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Gerbil needs access to your photo library so you can attach photos to memories."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FDF3E7",
+          "image": "./assets/icon.png",
+          "imageWidth": 160
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
