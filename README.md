@@ -1,6 +1,6 @@
-# Gerbil 🐹
+# Lil' Mems 🧸
 
-Gerbil is a voice-first family journal. A parent creates a private profile for
+Lil' Mems is a voice-first family journal. A parent creates a private profile for
 their child, and the app prompts them to record short spoken memories — or a
 photo with a voiceover — that get transcribed and timestamped automatically.
 Everything is stored so that, years down the line, the child can look back at

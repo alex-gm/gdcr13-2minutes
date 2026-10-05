@@ -30,7 +30,7 @@ export default function ChildPickerScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>🐹 Gerbil</Text>
+        <Text style={styles.title}>🧸 Lil' Mems</Text>
         <Pressable onPress={signOut}>
           <Text style={styles.signOut}>Sign out</Text>
         </Pressable>

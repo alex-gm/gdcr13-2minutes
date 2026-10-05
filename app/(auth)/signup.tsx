@@ -42,7 +42,7 @@ export default function SignupScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-        <Text style={styles.title}>🐹 Gerbil</Text>
+        <Text style={styles.title}>🧸 Lil' Mems</Text>
         <Text style={styles.subtitle}>Create an account to start recording memories.</Text>
 
         <View style={styles.form}>

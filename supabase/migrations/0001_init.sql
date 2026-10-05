@@ -1,4 +1,4 @@
--- Gerbil core schema: child profiles + timestamped memory records.
+-- Lil' Mems core schema: child profiles + timestamped memory records.
 -- Run via `supabase db push` or paste into the Supabase SQL editor.
 
 create extension if not exists "pgcrypto";

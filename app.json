@@ -1,23 +1,23 @@
 {
   "expo": {
-    "name": "Gerbil",
-    "slug": "gerbil",
+    "name": "Lil' Mems",
+    "slug": "lil-mems",
     "version": "1.0.0",
-    "scheme": "gerbil",
+    "scheme": "lilmems",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.gerbil.app",
+      "bundleIdentifier": "com.lilmems.app",
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "Gerbil needs microphone access so you can record voice memories and photo voiceovers.",
-        "NSPhotoLibraryUsageDescription": "Gerbil needs access to your photo library so you can attach photos to memories."
+        "NSMicrophoneUsageDescription": "Lil' Mems needs microphone access so you can record voice memories and photo voiceovers.",
+        "NSPhotoLibraryUsageDescription": "Lil' Mems needs access to your photo library so you can attach photos to memories."
       }
     },
     "android": {
-      "package": "com.gerbil.app",
+      "package": "com.lilmems.app",
       "adaptiveIcon": {
         "backgroundColor": "#FDF3E7",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -36,13 +36,13 @@
       [
         "expo-audio",
         {
-          "microphonePermission": "Gerbil needs microphone access so you can record voice memories and photo voiceovers."
+          "microphonePermission": "Lil' Mems needs microphone access so you can record voice memories and photo voiceovers."
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "Gerbil needs access to your photo library so you can attach photos to memories."
+          "photosPermission": "Lil' Mems needs access to your photo library so you can attach photos to memories."
         }
       ],
       [
