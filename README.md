@@ -112,3 +112,11 @@ microphone/photo permissions — they won't work in a web browser preview.
   `supabase gen types typescript` output.
 - There's no in-app way yet to hand the vault over to the child at 18 — that
   would be a natural next feature (e.g. an invite/export flow).
+- Uploads are compressed before they leave the device: voice memories record
+  mono AAC at 48kbps/22.05kHz (`lib/audio.ts`) instead of expo-audio's default
+  128kbps stereo preset, and photos are downscaled to a 2048px max edge and
+  re-compressed as JPEG (`lib/image.ts`). Both cut storage/egress costs
+  substantially with no noticeable quality loss for speech or a phone-sized
+  photo. Still open: a cold-storage tier for older memories and an
+  independent backup/export job, so the archive doesn't depend on this one
+  vendor relationship surviving for decades.

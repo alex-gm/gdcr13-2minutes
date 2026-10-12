@@ -1,5 +1,4 @@
 import {
-  RecordingPresets,
   requestRecordingPermissionsAsync,
   setAudioModeAsync,
   useAudioRecorder,
@@ -14,6 +13,7 @@ import { AudioPlaybackButton } from '../../../../components/AudioPlaybackButton'
 import { Button } from '../../../../components/Button';
 import { createVoiceMemory } from '../../../../lib/api/memories';
 import { useAuth } from '../../../../lib/auth-context';
+import { SPEECH_RECORDING_OPTIONS } from '../../../../lib/audio';
 import { colors, radii, spacing } from '../../../../lib/theme';
 
 type Phase = 'idle' | 'requesting' | 'recording' | 'review' | 'saving';
@@ -21,7 +21,7 @@ type Phase = 'idle' | 'requesting' | 'recording' | 'review' | 'saving';
 export default function RecordScreen() {
   const { childId } = useLocalSearchParams<{ childId: string }>();
   const { user } = useAuth();
-  const recorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
+  const recorder = useAudioRecorder(SPEECH_RECORDING_OPTIONS);
   const recorderState = useAudioRecorderState(recorder);
 
   const [phase, setPhase] = useState<Phase>('idle');

@@ -1,5 +1,4 @@
 import {
-  RecordingPresets,
   requestRecordingPermissionsAsync,
   setAudioModeAsync,
   useAudioRecorder,
@@ -9,13 +8,15 @@ import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AudioPlaybackButton } from '../../../../components/AudioPlaybackButton';
 import { Button } from '../../../../components/Button';
 import { createPhotoMemory } from '../../../../lib/api/memories';
 import { useAuth } from '../../../../lib/auth-context';
+import { SPEECH_RECORDING_OPTIONS } from '../../../../lib/audio';
+import { prepareMemoryPhoto } from '../../../../lib/image';
 import { colors, radii, spacing } from '../../../../lib/theme';
 
 type RecordingPhase = 'idle' | 'requesting' | 'recording' | 'review';
@@ -23,10 +24,11 @@ type RecordingPhase = 'idle' | 'requesting' | 'recording' | 'review';
 export default function PhotoMemoryScreen() {
   const { childId } = useLocalSearchParams<{ childId: string }>();
   const { user } = useAuth();
-  const recorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
+  const recorder = useAudioRecorder(SPEECH_RECORDING_OPTIONS);
   const recorderState = useAudioRecorderState(recorder);
 
   const [photoUri, setPhotoUri] = useState<string | null>(null);
+  const [processingPhoto, setProcessingPhoto] = useState(false);
   const [pickerError, setPickerError] = useState<string | null>(null);
   const [phase, setPhase] = useState<RecordingPhase>('idle');
   const [permissionError, setPermissionError] = useState<string | null>(null);
@@ -51,8 +53,16 @@ export default function PhotoMemoryScreen() {
       quality: 0.8,
       allowsEditing: true,
     });
-    if (!result.canceled && result.assets[0]) {
-      setPhotoUri(result.assets[0].uri);
+    if (result.canceled || !result.assets[0]) return;
+
+    const asset = result.assets[0];
+    setProcessingPhoto(true);
+    try {
+      setPhotoUri(await prepareMemoryPhoto(asset.uri, asset.width, asset.height));
+    } catch (err) {
+      setPickerError(err instanceof Error ? err.message : 'Could not process photo');
+    } finally {
+      setProcessingPhoto(false);
     }
   }
 
@@ -108,7 +118,11 @@ export default function PhotoMemoryScreen() {
     <SafeAreaView style={styles.container} edges={['bottom']}>
       <View style={styles.content}>
         <Text style={styles.stepLabel}>1. Choose a photo</Text>
-        {photoUri ? (
+        {processingPhoto ? (
+          <View style={styles.pickerButton}>
+            <ActivityIndicator color={colors.primary} />
+          </View>
+        ) : photoUri ? (
           <Pressable onPress={pickPhoto}>
             <Image source={{ uri: photoUri }} style={styles.photo} contentFit="cover" />
           </Pressable>
