@@ -60,6 +60,9 @@ create policy "Parents manage their own children's memories"
   using (auth.uid() = parent_id)
   with check (auth.uid() = parent_id);
 
+-- The memory detail screen subscribes to UPDATEs so transcripts appear live.
+alter publication supabase_realtime add table public.memories;
+
 -- ---------------------------------------------------------------------------
 -- storage buckets
 -- Files are stored under `${auth.uid()}/${childId}/${memoryId}-...` so the
